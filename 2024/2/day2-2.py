@@ -23,15 +23,9 @@ def test_level_pair(increasing, x, y):
 
 def test_levels(levels, recurse=False):
     print(f"{' '.join(map(str,levels))}")
-    increasing = None
+    increasing = levels[0] < levels[1]
 
     for x in range(0, len(levels) - 1):
-        if increasing is None:
-            if levels[x] < levels[x + 1]:
-                increasing = True
-            elif levels[x] > levels[x + 1]:
-                increasing = False
-
         # First try on full set, if it passes, we're good.
         try:
             test_level_pair(increasing, levels[x], levels[x + 1])
