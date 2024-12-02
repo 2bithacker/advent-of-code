@@ -2,8 +2,10 @@
 
 import fileinput
 
+
 class LevelException(Exception):
     pass
+
 
 def test_level_pair(increasing, x, y):
     # increasing, but next number is lower
@@ -15,41 +17,43 @@ def test_level_pair(increasing, x, y):
         raise LevelException(f"decreasing but {x} < {y}")
 
     # difference <1 or >3
-    if not(0 < abs(x - y) < 4):
+    if not (0 < abs(x - y) < 4):
         raise LevelException(f"level change {x} .. {y} is not between 1 and 3")
+
 
 def test_levels(levels, recurse=False):
     print(f"{' '.join(map(str,levels))}")
     increasing = None
 
-    for x in range(0, len(levels)-1):
-        if increasing == None:
-            if levels[x] < levels[x+1]:
+    for x in range(0, len(levels) - 1):
+        if increasing is None:
+            if levels[x] < levels[x + 1]:
                 increasing = True
-            elif levels[x] > levels[x+1]:
+            elif levels[x] > levels[x + 1]:
                 increasing = False
 
         # First try on full set, if it passes, we're good.
         try:
-            test_level_pair(increasing, levels[x], levels[x+1])
+            test_level_pair(increasing, levels[x], levels[x + 1])
         except LevelException as e:
             print(f"Error on position {x}: {e}")
             if not recurse:
                 raise
 
             # Try again with x-1, x, x+1 removed, if any of these pass, we're good
-            for y in range(x-1, x+2):
+            for y in range(x - 1, x + 2):
                 if y < 0:
                     continue
                 try:
-                    l = levels.copy()
-                    del l[y]
-                    test_levels(l)
+                    subset = levels.copy()
+                    del subset[y]
+                    test_levels(subset)
                     return
                 except LevelException as le:
                     print(f"Error on position {x}: {le}")
 
             raise
+
 
 if __name__ == "__main__":
     safe_count = 0
@@ -60,7 +64,7 @@ if __name__ == "__main__":
             test_levels(levels, True)
             safe_count += 1
             print("Safe")
-        except LevelException as e:
+        except LevelException:
             print("Unsafe")
             pass
 

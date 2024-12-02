@@ -1,14 +1,13 @@
 #!/usr/bin/env python3
 
 import fileinput
-import pprint
 
 col1 = list()
 col2 = list()
 
 if __name__ == "__main__":
     for line in fileinput.input(encoding="utf=8"):
-        (num1,num2) = line.split()
+        (num1, num2) = line.split()
         col1.append(int(num1))
         col2.append(int(num2))
 

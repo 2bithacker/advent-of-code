@@ -8,22 +8,22 @@ if __name__ == "__main__":
         levels = [int(x) for x in line.split()]
         safe = True
         increasing = None
-        for x in range(0, len(levels)-1):
-            if increasing == None:
-                if levels[x] < levels[x+1]:
+        for x in range(0, len(levels) - 1):
+            if increasing is None:
+                if levels[x] < levels[x + 1]:
                     increasing = True
-                elif levels[x] > levels[x+1]:
+                elif levels[x] > levels[x + 1]:
                     increasing = False
             # increasing, but next number is lower
-            if increasing and levels[x] > levels[x+1]:
+            if increasing and levels[x] > levels[x + 1]:
                 safe = False
                 break
             # decreasing, but next number is higher
-            if not increasing and levels[x] < levels[x+1]:
+            if not increasing and levels[x] < levels[x + 1]:
                 safe = False
                 break
             # difference <1 or >3
-            if not(0 < abs(levels[x] - levels[x+1]) < 4):
+            if not (0 < abs(levels[x] - levels[x + 1]) < 4):
                 safe = False
                 break
         if safe:
