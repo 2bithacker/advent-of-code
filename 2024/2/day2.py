@@ -7,13 +7,9 @@ if __name__ == "__main__":
     for line in fileinput.input(encoding="utf=8"):
         levels = [int(x) for x in line.split()]
         safe = True
-        increasing = None
+        increasing = levels[0] < levels[1]
+
         for x in range(0, len(levels) - 1):
-            if increasing is None:
-                if levels[x] < levels[x + 1]:
-                    increasing = True
-                elif levels[x] > levels[x + 1]:
-                    increasing = False
             # increasing, but next number is lower
             if increasing and levels[x] > levels[x + 1]:
                 safe = False
