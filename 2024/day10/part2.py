@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 
 import fileinput
-import pprint
 
 
 class Node(object):
