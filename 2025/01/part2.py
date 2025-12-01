@@ -9,7 +9,7 @@ class Dial(object):
         self.zero_count = 0
 
     def left(self, clicks):
-        rotations = int(clicks / 100)
+        rotations = clicks // 100
         remainder = clicks % 100
         if self.position == 0 and remainder > 0:
             # adjust for starting on a zero and dropping below it
@@ -23,7 +23,7 @@ class Dial(object):
             self.zero_count += 1
 
     def right(self, clicks):
-        rotations = int(clicks / 100)
+        rotations = clicks // 100
         remainder = clicks % 100
         self.zero_count += rotations
         self.position += remainder
