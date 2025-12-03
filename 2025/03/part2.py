@@ -9,17 +9,16 @@ class BatteryBank(object):
 
     def max_joltage(self, n=12) -> int:
         value = 0
-        available_cells = self.cells.copy()
+        start = 0
 
         for x in range(0, n):
             reserve = x - n + 1
             if reserve < 0:
-                highest = max(available_cells[:reserve])
+                highest = max(self.cells[start:reserve])
             else:
-                highest = max(available_cells)
+                highest = max(self.cells[start:])
             value += highest * (10 ** (n - x - 1))
-            h_index = available_cells.index(highest) + 1
-            available_cells = available_cells[h_index:]
+            start = self.cells.index(highest, start) + 1
         return value
 
 
